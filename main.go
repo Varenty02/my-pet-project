@@ -2,6 +2,7 @@ package main
 
 import (
 	"MyPetProject/component/appctx"
+	"MyPetProject/config"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"gorm.io/driver/mysql"
@@ -23,6 +24,7 @@ func main() {
 	if err != nil {
 		log.Println("Can connect to db")
 	}
+	db = config.AutoMigrateDB(db)
 	db = db.Debug()
 
 	appCtx := appctx.NewAppContext(db, secretKey, client)
